@@ -1,0 +1,23 @@
+services:
+  hw2-environment:
+    build: .
+    container_name: wireless-hw2
+    volumes:
+      - ./src:/homework/src
+      - ./seeds:/homework/seeds
+      - ./INSTRUCTIONS_AFL.md:/homework/INSTRUCTIONS_AFL.md:ro
+      - ./SETTINGS.md:/homework/SETTINGS.md:ro
+    working_dir: /homework
+    stdin_open: true
+    tty: true
+    environment:
+      - CK_FORK=no
+      - MY_UID=${MY_UID:-1000} 
+      - MY_GID=${MY_GID:-1000}
+    command: /bin/bash
+    platform: linux/amd64
+    privileged: true
+    cap_add:
+      - SYS_PTRACE              
+    security_opt:
+      - seccomp=unconfined 
