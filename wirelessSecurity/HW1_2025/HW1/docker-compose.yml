@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  hw1-environment:
+    build: .
+    container_name: wireless-hw1
+    volumes:
+      - ./src:/homework/src
+      - ./reports:/homework/reports
+      - ./INSTRUCTIONS.md:/homework/INSTRUCTIONS.md:ro
+      - ./SETTINGS.md:/homework/SETTINGS.md:ro
+    working_dir: /homework
+    stdin_open: true
+    tty: true
+    environment:
+      - CK_FORK=no
+      - MY_UID=${MY_UID:-1000}
+      - MY_GID=${MY_GID:-1000}
+    command: /bin/bash
